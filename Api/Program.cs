@@ -1,9 +1,7 @@
-using System.Security.Claims;
-using Microsoft.OpenApi.Models;
 using Application;
 using Infrastructure;
+using Microsoft.OpenApi.Models;
 using Shared.Core;
-using Azure.Storage.Blobs;
 
 namespace Api;
 
@@ -21,7 +19,7 @@ public class Program
         builder.Services.AddApplicationServices(builder.Configuration);
         builder.Services.AddInfrastructureServices(builder.Configuration);
         builder.Services.AddApplicationInsightsTelemetry();
-
+       
         builder.Services.AddSwaggerGen(setup =>
         {
             // enables the form for putting the bearer token

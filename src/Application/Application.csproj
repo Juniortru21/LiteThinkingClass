@@ -21,6 +21,9 @@
     <PackageReference Include="Azure.Storage.Blobs" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.ApplicationInsights" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
+    <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="WindowsAzure.Storage" />
   </ItemGroup>

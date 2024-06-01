@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
+    <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
