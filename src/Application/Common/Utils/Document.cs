@@ -25,12 +25,4 @@ public class Document<T> where T : notnull
         lines.AddRange(valueLines);
         await File.WriteAllLinesAsync(path, [.. lines]);
     }
-
-    public static async Task UploadFromFileAsync(BlobContainerClient containerClient, string fileName, FileStream fileStream)
-    {
-        BlobClient blobClient = containerClient.GetBlobClient(fileName);
-
-        await blobClient.UploadAsync(fileStream, true);
-        fileStream.Close();
-    }
 }

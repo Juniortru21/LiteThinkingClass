@@ -17,17 +17,22 @@ public class GetTransactionsQuery : IRequest<Result<GetTransactionsQueryDto>>
         public async Task<Result<GetTransactionsQueryDto>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
         {
             var path = configuration.GetSection("FilePath").Value;
-            //var fileName = configuration.GetSection("FileName").Value;
+            var fileName = configuration.GetSection("FileName").Value ?? string.Empty;
+            var extension = configuration.GetSection("Extension").Value ?? string.Empty;
+
             var transactions = await transaccionRepository.GetAllAsync();
 
-            //await Document<Transaction>.SaveToCsv(transactions, $"{path}{fileName}");
+            transactions.ToList().ForEach(async x =>
+            {
+                await Document<Transaction>.SaveToCsv(transactions.Where(y => y == x), $"{path}{fileName}{x.File}.{extension}");
 
-            //var fileStream = Document<Transaction>.ImportCsv($"{path}{fileName}");
+                var fileStream = Document<Transaction>.ImportCsv($"{path}{fileName}{x.File}.{extension}");
 
-            //var blobStorage = new BlobStorageService(configuration);
-            //await blobStorage.DownloadFile();
-            //await blobStorage.UploadFile(fileStream);
+                var blobStorage = new BlobStorageService(configuration);
 
+                await blobStorage.UploadFile($"{fileName}{x.File}", extension, fileStream);
+                await blobStorage.DownloadFile();
+            });
 
             var transactionsDto = transactions
                     .Select(x => new GetTransactionsQueryValueDto()

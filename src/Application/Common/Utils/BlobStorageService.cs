@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using System.Xml.Linq;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,11 +15,11 @@ public class BlobStorageService(IConfiguration configuration)
     public string StorageAccountName { get; set; } = configuration.GetSection("AzureStorage:StorageAccountName").Value ?? string.Empty;
     public string ContainerName { get; set; } = configuration.GetSection("AzureStorage:ContainerName").Value ?? string.Empty;
 
-    public async Task UploadFile(FileStream file)
+    public async Task UploadFile(string fileName, string extension, FileStream file)
     {
-        BlobServiceClient blobService = new BlobServiceClient(ConnectionString);
+        BlobServiceClient blobService = new (ConnectionString);
         BlobContainerClient containerClient = blobService.GetBlobContainerClient(ContainerName);
-        var blobClient = containerClient.GetBlobClient("Prueba.csv");
+        var blobClient = containerClient.GetBlobClient($"{fileName}.{extension}");
         await blobClient.UploadAsync(file, true);
     }
 
@@ -38,9 +39,9 @@ public class BlobStorageService(IConfiguration configuration)
         {
             BlobServiceClient blobService= new BlobServiceClient(ConnectionString);
             BlobContainerClient containerClient = blobService.GetBlobContainerClient(ContainerName);
-            BlobClient blobClient = containerClient.GetBlobClient("BATCO_price_20240530.csv");
+            BlobClient blobClient = containerClient.GetBlobClient("Developer.jpg");
 
-            await blobClient.DownloadToAsync("C:\\Users\\Mainsoft\\Desktop\\Azure\\Valor.csv");
+            await blobClient.DownloadToAsync("C:\\LiteThinking\\Test\\Developer.jpg");
         }
         catch (Exception ex)
         {
