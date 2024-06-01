@@ -15,6 +15,7 @@ public class TransactionController : BaseController
     [ActionName(nameof(GetAll))]
     public async Task<IActionResult> GetAll()
     {
+        //
         var query = new GetTransactionsQuery();
         var result = await this.Mediator.Send(query);
         return this.FromResult(result);
