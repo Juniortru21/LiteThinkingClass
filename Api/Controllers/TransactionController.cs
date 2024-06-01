@@ -10,7 +10,7 @@ namespace Api.Controllers;
 public class TransactionController : BaseController
 {
     [HttpGet]
-    [Route("GetAll")]
+    [Route("GetAllGutHub")]
     [Produces(typeof(GetTransactionsQueryDto))]
     [ActionName(nameof(GetAll))]
     public async Task<IActionResult> GetAll()
