@@ -20,6 +20,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddApplicationServices(builder.Configuration);
         builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddApplicationInsightsTelemetry();
 
         builder.Services.AddSwaggerGen(setup =>
         {
