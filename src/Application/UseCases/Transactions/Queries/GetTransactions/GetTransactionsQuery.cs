@@ -15,7 +15,7 @@ public class GetTransactionsQuery : IRequest<Result<GetTransactionsQueryDto>>
     {
         public async Task<Result<GetTransactionsQueryDto>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
         {
-            var logs = new Logs(configuration);
+            var logs = new Logs(configuration);//
             await logs.AddLog($"Start the GetTransactionsQuery logs", "Admin");
             await logs.SearchLog();
             var path = configuration.GetSection("FilePath").Value;

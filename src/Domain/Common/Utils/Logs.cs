@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 namespace Domain.Common.Utils;
 public class Logs
 {
-    private Settings _settings = new ();
+    private Settings _settings = new ();//
     public Logs(IConfiguration configuration)
     {
         _settings.Uri = configuration.GetSection("AzureCosmosDB").GetSection("Uri").Value ?? string.Empty;
