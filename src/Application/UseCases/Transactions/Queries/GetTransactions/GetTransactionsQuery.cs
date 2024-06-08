@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
-using System.IO;
-using Microsoft.Extensions.Configuration;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using Application.Common.Utils;
 using Application.UseCases.Common.Handlers;
 using Application.UseCases.Common.Results;
+using Domain.Common.Utils;
 using Domain.Entities;
+using Microsoft.Extensions.Configuration;
 namespace Application.UseCases.Transactions.Queries.GetTransactions;
 
 public class GetTransactionsQuery : IRequest<Result<GetTransactionsQueryDto>>
@@ -16,6 +15,9 @@ public class GetTransactionsQuery : IRequest<Result<GetTransactionsQueryDto>>
     {
         public async Task<Result<GetTransactionsQueryDto>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
         {
+            var logs = new Logs(configuration);
+            await logs.AddLog($"Start the GetTransactionsQuery logs", "Admin");
+            await logs.SearchLog();
             var path = configuration.GetSection("FilePath").Value;
             var fileName = configuration.GetSection("FileName").Value ?? string.Empty;
             var extension = configuration.GetSection("Extension").Value ?? string.Empty;
