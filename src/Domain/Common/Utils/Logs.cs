@@ -1,5 +1,4 @@
 ﻿using Microsoft.Azure.Cosmos;
-using Microsoft.Azure.Cosmos.Serialization.HybridRow.Layouts;
 using Microsoft.Extensions.Configuration;
 
 namespace Domain.Common.Utils;
